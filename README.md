@@ -1,2 +1,2 @@
-# Custom-L2-Cloud-Provider-Shell-Example
-L2 Custom Cloud Provider Shell implementation example
+# Custom-Cloud-Provider-Shell-Example
+Simple Custom Cloud Provider implementation example
