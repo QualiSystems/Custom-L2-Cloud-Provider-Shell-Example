@@ -290,8 +290,10 @@ class HeavenlyCloudServiceWrapper(object):
         :rtype: SetVlanResult
         """
         try:
+            vnic_name = '' if not 'Vnic Name'  in set_vlan_action.customActionAttributes else set_vlan_action.customActionAttributes['Vnic Name']
             interface_id = HeavenlyCloudService.connect_vlan(cloud_provider_resource, set_vlan_action)
-            return SetVlanResult(actionId=set_vlan_action.actionId, success=True, updatedInterface=interface_id)
+
+            return SetVlanResult(actionId=set_vlan_action.actionId, success=True,infoMessage=vnic_name + ' requested', updatedInterface=interface_id)
         except Exception as e:
             return SetVlanResult(actionId=set_vlan_action.actionId, success=False, errorMessage=e.message)
 
