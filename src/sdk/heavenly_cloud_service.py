@@ -81,5 +81,6 @@ class HeavenlyCloudService(object):
         return str(uuid.uuid4())
 
     @staticmethod
-    def disconnect_vlan(cloud_provider_resource, remove_vlan_action):
+    def disconnect_vlan(cloud_provider_resource, disconnect_interface_id, vm_instance_id):
         return str(uuid.uuid4())
+
