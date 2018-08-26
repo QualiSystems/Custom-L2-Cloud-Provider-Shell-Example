@@ -336,9 +336,13 @@ class HeavenlyCloudServiceWrapper(object):
         """
 
         try:
-            HeavenlyCloudService.disconnect_vlan(cloud_provider_resource, remove_vlan_action)
-            disconnected_interface_id = remove_vlan_action.connectorAttributes['Interface']
-            return RemoveVlanResult(actionId=remove_vlan_action.actionId, success=True, updatedInterface=disconnected_interface_id)
+
+            disconnect_interface_id = remove_vlan_action.connectorAttributes['Interface']
+            vm_instance_id = remove_vlan_action.customActionAttributes['VM_UUID']
+
+            HeavenlyCloudService.disconnect_vlan(cloud_provider_resource,disconnect_interface_id, vm_instance_id)
+
+            return RemoveVlanResult(actionId=remove_vlan_action.actionId, success=True, updatedInterface=disconnect_interface_id)
         except Exception as e:
             return RemoveVlanResult(actionId=remove_vlan_action.actionId, success=False,errorMessage=e.message)
 
