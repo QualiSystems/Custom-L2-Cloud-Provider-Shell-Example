@@ -201,15 +201,21 @@ class HeavenlyCloudServiceWrapper(object):
             vm_name = request[u'deployedAppJson'][u'name']
             vm_uid =  request[u'deployedAppJson'][u'vmdetails'][u'uid']
             address = request[u'deployedAppJson'][u'address']
-            vm_instance = HeavenlyCloudService.get_instance(cloud_provider_resource, vm_name, vm_uid, address)
 
+            vm_instance = HeavenlyCloudService.get_instance(cloud_provider_resource, vm_name, vm_uid, address)
             vm_instance_data = HeavenlyCloudServiceWrapper.extract_vm_instance_data(vm_instance)
             vm_network_data = HeavenlyCloudServiceWrapper.extract_vm_instance_network_data(vm_instance)
+
+            # example of reading custom data created via deployed_app_additional_data_dict at delpoy stage
+            # created_by = next((deployed_app_additional_data['value'] for deployed_app_additional_data in request[u'deployedAppJson'][u'vmdetails'][u'vmCustomParams'] if
+            #                    deployed_app_additional_data['name'] == 'CreatedBy'), None)
+            # if created_by:
+            #     vm_instance_data.append(VmDetailsProperty(key='CreatedBy',value=created_by))
 
             # TODO when prepare connectivity is finished uncomment
             # currently we get error: Check failed because resource is connected to more than one subnet, while reservation doesn't have any subnet services
             # result = VmDetailsData(vmInstanceData=vm_instance_data, vmNetworkData=vm_network_data, appName=vm_name)
-            result = VmDetailsData(vmInstanceData=vm_instance_data, vmNetworkData=None, appName=vm_name)
+            result = VmDetailsData(vmInstanceData=vm_instance_data, vmNetworkData=vm_network_data, appName=vm_name)
             results.append(result)
 
         return results
