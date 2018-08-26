@@ -172,16 +172,16 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
         :return:
         """
         with LoggingSessionContext(context) as logger, ErrorHandlingContext(logger):
-                self._log(logger, 'GetVmDetails_context', context)
-                self._log(logger, 'GetVmDetails_requests', requests)
-                cloud_provider_resource = L2HeavenlyCloudShell.create_from_context(context)
-                result = HeavenlyCloudServiceWrapper.get_vm_details(cloud_provider_resource, cancellation_context,
-                                                                     requests)
-                result_json = json.dumps(result, default=lambda o: o.__dict__, sort_keys=True, separators=(',', ':'))
+            self._log(logger, 'GetVmDetails_context', context)
+            self._log(logger, 'GetVmDetails_requests', requests)
+            cloud_provider_resource = L2HeavenlyCloudShell.create_from_context(context)
+            result = HeavenlyCloudServiceWrapper.get_vm_details(logger, cloud_provider_resource, cancellation_context,
+                                                                 requests)
+            result_json = json.dumps(result, default=lambda o: o.__dict__, sort_keys=True, separators=(',', ':'))
 
-                self._log(logger, 'GetVmDetails_result', result_json)
+            self._log(logger, 'GetVmDetails_result', result_json)
 
-                return result_json
+            return result_json
 
 
     def remote_refresh_ip(self, context, ports, cancellation_context):
