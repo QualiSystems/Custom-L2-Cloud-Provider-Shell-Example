@@ -60,9 +60,6 @@ node_types:
           VLAN Type:
             type: string
             default: VLAN
-      concurrent_command_capability:
-        type: cloudshell.capabilities.SupportConcurrentCommands
-
     artifacts:
       icon:
         file: heavenly-clouds-icon.png
