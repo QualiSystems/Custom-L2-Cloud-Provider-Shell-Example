@@ -87,7 +87,7 @@ class HeavenlyCloudService(object):
     # region l2 methods
 
     @staticmethod
-    def connect_vlan(cloud_provider_resource, set_vlan_action):
+    def connect_vlan(cloud_provider_resource, vm_id, vlan_id, vlan_mode, vnic_name):
         return HeavenlyCloudService.rand_mac()
 
     @staticmethod
