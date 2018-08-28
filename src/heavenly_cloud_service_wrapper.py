@@ -99,7 +99,7 @@ class HeavenlyCloudServiceWrapper(object):
                                vmDetailsData=vm_details_data)
 
     @staticmethod
-    def deploy_angel(context, cloudshell_session, cloud_provider_resource, deploy_app_action, cancellation_context):
+    def deploy_man(context, cloudshell_session, cloud_provider_resource, deploy_app_action, cancellation_context):
         """
         :param ResourceCommandContext context:
         :param CloudShellAPISession cloudshell_session:
@@ -287,7 +287,7 @@ class HeavenlyCloudServiceWrapper(object):
         :param str deployed_app_public_ip:
         """
 
-        check_cancellation_context()
+        check_cancellation_context(cancellation_context)
 
         curr_ip = HeavenlyCloudService.remote_refresh_ip(cloud_provider_resource, cancellation_context,
                                                          resource_full_name, vm_id)
