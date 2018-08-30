@@ -42,7 +42,7 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
 
     def get_inventory(self, context):
 
-        # uncomment - if there is nothing to validate
+    ## uncomment - if there is nothing to validate
         # return AutoLoadDetails([], [])
 
         # read from context
@@ -56,7 +56,7 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
                 raise ValueError('evil cannot use heaven ')
 
             if cloud_provider_resource.region == 'sun':
-                raise ValueError('invalid region, sorry ca\'nt deploy instances on the sun')
+                raise ValueError('invalid region, sorry cannot deploy instances on the sun')
 
             # using your cloud provider sdk
             if not HeavenlyCloudService.can_connect(cloud_provider_resource.user, cloud_provider_resource.password,
@@ -73,7 +73,7 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
 
     # <editor-fold desc="Mandatory Commands">
 
-    def Deploy(self, context, request=None, cancellation_context=None):
+    def Deploy(self, context, request, cancellation_context=None):
         """
        Deploy
        :param ResourceCommandContext context:
