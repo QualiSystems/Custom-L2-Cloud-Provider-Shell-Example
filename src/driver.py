@@ -124,8 +124,8 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
             cloud_provider_resource = L2HeavenlyCloudShell.create_from_context(context)
             resource_ep =  context.remote_endpoints[0]
             deployed_app_dict = json.loads(resource_ep.app_context.deployed_app_json)
-
-            HeavenlyCloudServiceWrapper.power_on(cloud_provider_resource, deployed_app_dict['vmdetails']['uid'])
+            vm_uid = deployed_app_dict['vmdetails']['uid']
+            HeavenlyCloudServiceWrapper.power_on(cloud_provider_resource,vm_uid)
 
     def PowerOff(self, context, ports):
         """
@@ -140,8 +140,8 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
             cloud_provider_resource = L2HeavenlyCloudShell.create_from_context(context)
             resource_ep =  context.remote_endpoints[0]
             deployed_app_dict = json.loads(resource_ep.app_context.deployed_app_json)
-
-            HeavenlyCloudServiceWrapper.power_off(cloud_provider_resource, deployed_app_dict['vmdetails']['uid'])
+            vm_uid = deployed_app_dict['vmdetails']['uid']
+            HeavenlyCloudServiceWrapper.power_off(cloud_provider_resource, vm_uid)
 
     def PowerCycle(self, context, ports, delay):
         pass
@@ -159,8 +159,8 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
             cloud_provider_resource = L2HeavenlyCloudShell.create_from_context(context)
             resource_ep =  context.remote_endpoints[0]
             deployed_app_dict = json.loads(resource_ep.app_context.deployed_app_json)
-
-            HeavenlyCloudServiceWrapper.delete_instance(cloud_provider_resource, deployed_app_dict['vmdetails']['uid'])
+            vm_uid = deployed_app_dict['vmdetails']['uid']
+            HeavenlyCloudServiceWrapper.delete_instance(cloud_provider_resource, vm_uid)
 
 
     def GetVmDetails(self, context, requests, cancellation_context):
@@ -209,9 +209,9 @@ class L2HeavenlyCloudShellDriver(ResourceDriverInterface):
                     deployed_app_public_ip = public_ip_att['value']
 
                 deployed_app_fullname = remote_ep.fullname
-                vm_instance_id = deployed_app_dict['vmdetails']['uid']
+                vm_uid = deployed_app_dict['vmdetails']['uid']
 
-                HeavenlyCloudServiceWrapper.remote_refresh_ip(cloud_provider_resource, cancellation_context, cloudshell_session, deployed_app_fullname, vm_instance_id, deployed_app_private_ip, deployed_app_public_ip)
+                HeavenlyCloudServiceWrapper.remote_refresh_ip(cloud_provider_resource, cancellation_context, cloudshell_session, deployed_app_fullname, vm_uid, deployed_app_private_ip, deployed_app_public_ip)
 
     def ApplyConnectivityChanges(self, context, request):
         """
